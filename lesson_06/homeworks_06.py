@@ -190,13 +190,9 @@ print('task 6.2 from LMS')
 Просто вставте посилання на свій репозиторій та переконайтеся, що ви можете побачити код."""
 while True:
     input_phrase = input('Write any word that contains the letter "h".')
-    count = 0
-    for i in input_phrase:
-        if i == 'h' or i == 'H':
-            count += 1
-    if count >= 1:
-        print(f"Thanks, for  your word '{input_phrase}'")
-        break
+    if 'h' in input_phrase or 'H'in input_phrase:
+    print(f"Thanks, for  your word '{input_phrase}'")
+    break
     else:
         print("Please, enter word with the 'h' letter. ")
 print()
