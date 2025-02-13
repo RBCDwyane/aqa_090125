@@ -50,9 +50,7 @@ sum_numbers_in_list("21")  # ValueError
 def sum_numbers_in_list(input_list):
     if not input_list:
         raise ValueError
-    if isinstance(input_list, int):
-        raise ValueError
-    if isinstance(input_list, str):
+    if isinstance(input_list, (int, str, dict)):
         raise ValueError
     final = []
     for item in input_list:
