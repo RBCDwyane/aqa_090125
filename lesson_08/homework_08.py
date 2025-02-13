@@ -47,18 +47,32 @@ sum_numbers_in_list("21")  # ValueError
 """
 
 
-def sum_numbers_in_list(string_list: list):
-    """Повертає список сум чисел зі списку строк,
-    які складаються з чисел, розділених комою."""
-
-    result = []
-    for i in string_list:
+def sum_numbers_in_list(input_list):
+    if not input_list:
+        raise ValueError
+    if isinstance(input_list, (int, str, dict)):
+        raise ValueError
+    final = []
+    for item in input_list:
+        count = 0
+        wrong_value = False
         try:
-            result.append(sum([int(x) for x in i.split(",")]))
-        except ValueError as e:
-            result.append("Не можу це зробити!")
-
-    return result
+            result = item.split(",")
+        except AttributeError as e:
+            final.append(f"Не можу це зробити! {type(e).__name__}")
+            continue
+        for x in result:
+            try:
+                y = int(x)
+                count += y
+            except ValueError as e:
+                final.append(f"Не можу це зробити! {type(e).__name__}")
+                wrong_value = True
+                break
+        if not wrong_value:
+            if count > 0:
+                final.append(count)
+    return final
 
 
 if __name__ == "__main__":
