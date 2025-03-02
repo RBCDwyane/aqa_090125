@@ -66,6 +66,8 @@ def str_filtering(input_list=None):
 Сума цифр числа 12345: 15
 """
 def sum_of_digits(number=None):
-    if not isinstance(number, int) or number <= 0 or not number:
-        return "Input must be a natural number"
+    if not isinstance(number, int) or not number:
+        raise TypeError("Input must be a natural number")
+    if number <= 0:
+        raise ValueError("Input must be a natural number")
     return f'The sum of the digits of the number will be {sum(int(digit) for digit in str(number))}'
