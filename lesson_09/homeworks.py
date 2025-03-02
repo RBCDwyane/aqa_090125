@@ -5,12 +5,10 @@
 """
 
 def multiplication_table(number=None):
-    if number is None:
-        return ("The input must be a positive integer.")
-    if not isinstance(number, int):
-        return ("The input must be a positive integer.")
+    if number is None or not isinstance(number, int):
+        raise TypeError("The input must be a positive integer.")
     if number < 1:
-        return ("The input must be a positive integer.")
+        raise ValueError("The input must be a positive integer.")
     table = []
     multiplier = 1
     while True:
