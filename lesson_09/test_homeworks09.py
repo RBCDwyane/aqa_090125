@@ -78,30 +78,49 @@ class Test_string_reverse(unittest.TestCase):
                 string_reverse(value)
 
 # pytest 4-5 tasks
-@pytest.mark.parametrize("test_input, expected", [
-    (['1', '2', 3, True, 'False', 5, '6', 7, 8, 'Python', 9, 0, 'Lorem Ipsum', ('Lorem Ipsum', 2), {'key': 'value'}, [1,2]],
-     ['1', '2', 'False', '6', 'Python', 'Lorem Ipsum']),
-    ([True, 3], []),
-    ((), "The input must be not empty list."),
-    ([], "The input must be not empty list."),
-    ({}, "The input must be not empty list."),
-    ("", "The input must be not empty list."),
-])
-def test_str_filtering(test_input, expected):
-    assert str_filtering(test_input) == expected
+class TestGroupedStrFiltering:
+    @pytest.mark.parametrize("test_input, expected", [
+        (['1', '2', 3, True, 'False', 5, '6', 7, 8, 'Python', 9, 0, 'Lorem Ipsum', ('Lorem Ipsum', 2), {'key': 'value'}, [1,2]],
+         ['1', '2', 'False', '6', 'Python', 'Lorem Ipsum']),
+        ([True, 3], []),
+    ])
+    def test_str_filtering(self, test_input, expected):
+        assert str_filtering(test_input) == expected
+    @pytest.mark.parametrize("test_input, expected_error", [
+        ([], "The input list cannot be empty."),
+        (None, "The input must be a list."),
+        ("string", "The input must be a list."),
+        (123, "The input must be a list."),
+        (2.2, "The input must be a list."),
+        ({}, "The input must be a list."),
+        ((), "The input must be a list."),
+    ])
+    def test_type_and_empty_list_error(self, test_input, expected_error):
+        with pytest.raises((ValueError, TypeError)) as exc_info:
+            str_filtering(test_input)
+        assert str(exc_info.value) == expected_error
 
-@pytest.mark.parametrize("test_input, expected", [
-    (12345, "The sum of the digits of the number will be 15"),
-    (-1, "Input must be a natural number"),
-    (0, "Input must be a natural number"),
-    (1.1, "Input must be a natural number"),
-    ("", "Input must be a natural number"),
-    ([], "Input must be a natural number"),
-    ((), "Input must be a natural number"),
-    ({}, "Input must be a natural number"),
-])
-def test_sum_of_digits(test_input, expected):
-    assert sum_of_digits(test_input) == expected
+
+class TestGroupedSumOfDigits:
+    @pytest.mark.parametrize("test_input, expected", [
+        (12345, "The sum of the digits of the number will be 15"),
+        (1, "The sum of the digits of the number will be 1"),
+    ])
+    def test_sum_of_digits(self, test_input, expected):
+        assert sum_of_digits(test_input) == expected
+    @pytest.mark.parametrize("test_input, expected_error", [
+        (-1, "Input must be a natural number"),
+        (0, "Input must be a natural number"),
+        (1.1, "Input must be a natural number"),
+        ("", "Input must be a natural number"),
+        ([], "Input must be a natural number"),
+        ((), "Input must be a natural number"),
+        ({}, "Input must be a natural number"),
+    ])
+    def test_negative_sumofdigits(self, test_input, expected_error):
+        with pytest.raises((TypeError, ValueError)) as exc_info:
+            sum_of_digits(test_input)
+        assert str(exc_info.value) == expected_error
 
 if __name__ == '__main__':
     unitest.main()
