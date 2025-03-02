@@ -74,8 +74,8 @@ class Test_string_reverse(unittest.TestCase):
     def test_negative(self):
         test_values = [(), [], {}, None, 576]
         for value in test_values:
-            result = string_reverse(value)
-            self.assertEqual(result, "The input must be string.")
+            with self.assertRaises(TypeError):
+                string_reverse(value)
 
 # pytest 4-5 tasks
 @pytest.mark.parametrize("test_input, expected", [
