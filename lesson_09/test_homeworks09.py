@@ -43,10 +43,18 @@ class Test_list_avg(unittest.TestCase):
         result = list_avg([1])
         self.assertEqual(result, 1.0)
     def test_wrong_input(self):
-        test_values = [[], {}, 2, 'string', (), None]
-        for value in test_values:
-            result = list_avg(value)
-            self.assertEqual(result, "The input must be list.")
+        with self.assertRaises(TypeError):
+            list_avg(())
+        with self.assertRaises(TypeError):
+            list_avg({})
+        with self.assertRaises(TypeError):
+            list_avg(2)
+        with self.assertRaises(TypeError):
+            list_avg(2.2)
+        with self.assertRaises(TypeError):
+            list_avg('text')
+        with self.assertRaises(TypeError):
+            list_avg()
     def test_wrong_inTheList(self):
         test_values = [[1, 2, 3, 4, 's'],
                        [1, 2, 3, 4, [1]],
