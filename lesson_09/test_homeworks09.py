@@ -16,10 +16,16 @@ class Test_multiplication_table(unittest.TestCase):
         result = multiplication_table(24)
         self.assertEqual(result, ['24x1=24'])
     def test_negative(self):
-        test_values = [-1, 0, None, 'text', 3.5]
-        for value in test_values:
-            result = multiplication_table(value)
-            self.assertEqual(result, "The input must be a positive integer.")
+        with self.assertRaises(ValueError):
+            multiplication_table(-1)
+        with self.assertRaises(ValueError):
+            multiplication_table(0)
+        with self.assertRaises(TypeError):
+            multiplication_table(None)
+        with self.assertRaises(TypeError):
+            multiplication_table('text')
+        with self.assertRaises(TypeError):
+            multiplication_table(3.5)
     def test_max(self):
             result = multiplication_table(26)
             self.assertEqual(result, [])
