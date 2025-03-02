@@ -40,7 +40,7 @@ def list_avg(lister=None):
 """
 def string_reverse(string=None):
     if string is None or not isinstance(string, str) or not string:
-        return "The input must be string."
+        raise TypeError("The input must be string.")
     return ''.join(reversed(string))
 
 """Є list з даними lst1 = ['1', '2', 3, True, 'False', 5, '6', 7, 8, 'Python', 9, 0, 'Lorem Ipsum'].
