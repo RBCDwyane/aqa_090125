@@ -31,6 +31,8 @@ def list_avg(lister=None):
             raise TypeError("The input list must include a integer or float numbers.")
         sum_list += x
         count += 1
+    if count == 0:
+        raise ValueError("Cannot compute average of an empty list.")
     avg_list = sum_list / count
     return avg_list
 
