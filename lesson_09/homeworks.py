@@ -51,8 +51,10 @@ def string_reverse(string=None):
 Просто вставте посилання на свій репозиторій та переконайтеся, що ви можете побачити код."""
 
 def str_filtering(input_list=None):
-    if input_list is None or not isinstance(input_list, list) or not input_list:
-        return "The input must be not empty list."
+    if not isinstance(input_list, list):
+        raise TypeError("The input must be a list.")
+    if not input_list:
+        raise ValueError("The input list cannot be empty.")
     filtered_list = [x for x in input_list if isinstance(x, str)]
     return filtered_list
 
