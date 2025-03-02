@@ -30,7 +30,7 @@ def list_avg(lister=None):
     count = 0
     for x in lister:
         if not isinstance(x, (float, int)):
-            return "The number in list must be float."
+            raise TypeError("The input list must include a integer or float numbers.")
         sum_list += x
         count += 1
     avg_list = sum_list / count
