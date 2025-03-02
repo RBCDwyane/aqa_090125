@@ -62,8 +62,10 @@ class Test_list_avg(unittest.TestCase):
                        [1, 2, 3, 4, None],
                        [1, 2, 3, 4, (3, 4)]]
         for value in test_values:
-            result = list_avg(value)
-            self.assertEqual(result, "The number in list must be float.")
+            with self.assertRaises(TypeError):
+                list_avg(value)
+        with self.assertRaises(ValueError):
+            list_avg([])
 
 class Test_string_reverse(unittest.TestCase):
     def test_posive(self):
