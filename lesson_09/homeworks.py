@@ -22,8 +22,8 @@ def multiplication_table(number=None):
 """  Написати функцію, яка розрахує середнє арифметичне списку чисел."""
 
 def list_avg(lister=None):
-    if lister is None or not isinstance(lister, list) or not lister:
-        return "The input must be list."
+    if lister is None or not isinstance(lister, list):
+        raise TypeError("The input must be a list of numbers.")
     sum_list = 0
     count = 0
     for x in lister:
