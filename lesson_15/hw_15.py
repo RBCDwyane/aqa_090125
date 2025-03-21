@@ -101,20 +101,27 @@ class Rhombus_3:
     def __init__(self, side_a, angle_ab):
         if not isinstance(side_a, (int, float)) or side_a <= 0:
             raise ValueError("Довжина сторони повинна бути числом більше 0")
-        self.side_a = side_a
-        self.set_angles(angle_ab)
+        self._side_a = side_a
+        self._angle_ab = angle_ab
 
-    def set_angles(self, angle_ab):
-        if not (0 < angle_ab < 180):
-            raise ValueError("Значення angle_ab повинно бути більше 0 та менше 180)")
-        if not isinstance(angle_ab, (int, float)):
-            raise TypeError("Значення angle_ab повинно бути більше 0 та менше 180)")
-        if angle_ab == 90:
+    @property
+    def side_a(self):
+        return self._side_a
+    @property
+    def angle_ab(self):
+        return self._angle_ab
+    @angle_ab.setter
+    def angle_ab(self, value):
+        if not isinstance(value, (int, float)):
+            raise TypeError("Значення angle_ab повинно бути числом більше 0 та менше 180")
+        if not (0 < value < 180):
+            raise ValueError("Значення angle_ab повинно бути числом більше 0 та менше 180")
+        if value == 90:
             raise ValueError("Кути ромба не можуть бути 90 градусів, бо тоді він переходе у прямокутник")
-        self.angle_ab = angle_ab
-        self.angle_bc = 180 - angle_ab
-        self.angle_cd = angle_ab
-        self.angle_da = self.angle_bc
+        self._angle_ab = value
+        self.angle_bc = 180 - value
+        self.angle_cd = value
+        self.angle_da = 180 - value
 
     def __str__(self):
         return f"Ромб має сторони довжиною {self.side_a}см та кути А та С {self.angle_ab} градусів, " \
