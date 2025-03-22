@@ -38,3 +38,103 @@
 6. Назначте ревьювером викладача
 7. **Посилання на PR вставте у форму відповіді для ДЗ в навчальній системі**
 """
+
+# 1st task
+class Employe:
+    def __init__(self, name, salary):
+        if not isinstance(name, str):
+            raise TypeError('параметр name повинен бути строкою')
+        self.name = name
+        if not isinstance(salary, int):
+            raise TypeError('параметр salary повинен бути цiлим числом')
+        self.salary = salary
+
+class Manager(Employe):
+    def __init__(self, name, salary, department):
+        Employe.__init__(self, name, salary)
+        if not isinstance(department, str):
+            raise TypeError('параметр department повинен бути строкою')
+        self.department = department
+
+class Developer(Employe):
+    def __init__(self, name, salary, programming_language):
+        Employe.__init__(self, name, salary)
+        if not isinstance(programming_language, str):
+            raise TypeError('параметр programming_language повинен бути строкою')
+        self.programming_language = programming_language
+
+class TeamLead(Manager, Developer):
+    def __init__(self, name, salary, department, programming_language, team_size):
+        Manager.__init__(self, name, salary, department)
+        Developer.__init__(self, name, salary, programming_language)
+        if not isinstance(team_size, int):
+            raise TypeError('параметр team_size повинен бути цiлим числом')
+        self.team_size = team_size
+
+
+# 2nd task
+from abc import ABC, abstractmethod
+
+class Figure(ABC):
+    @abstractmethod
+    def square(self):
+        pass
+    @abstractmethod
+    def perimeter(self):
+        pass
+
+class Triangle(Figure):
+    def __init__(self, side_a, side_b, side_c):
+        if not all(isinstance(side, (int, float)) for side in (side_a, side_b, side_c)):
+            raise TypeError('Значення сторін повинно бути числом більше 0')
+        if not all(side > 0 for side in (side_a, side_b, side_c)):
+            raise ValueError('Значення сторін повинно бути числом більше 0')
+        if side_a + side_b <= side_c or side_a + side_c <= side_b or side_b  + side_c <= side_a:
+            raise ValueError("Сума будь-яких двох сторін повинна бути більше третьої.")
+        self._side_a = side_a
+        self._side_b = side_b
+        self._side_c = side_c
+
+    def square(self):
+        first = (self._side_a + self._side_b + self._side_c) / 2
+        second = (first * (first - self._side_a) *
+                       (first - self._side_b) * (first - self._side_c))
+        return round(second, 2)
+    def perimeter(self):
+        return round((self._side_a + self._side_b + self._side_c), 2)
+
+class Square(Figure):
+    def __init__(self, side):
+        if not isinstance(side, (int, float)):
+            raise TypeError('Значення сторони повинно бути числом більше 0')
+        if not side > 0 :
+            raise ValueError('Значення сторони повинно бути числом більше 0')
+        self._side = side
+
+    def square(self):
+        return round((self._side ** 2), 2)
+    def perimeter(self):
+        return round((self._side * 4), 2)
+
+class Circle(Figure):
+    Pi = 3.14159
+    def __init__(self, radius):
+        if not isinstance(radius, (int, float)):
+            raise TypeError('Значення радіусу повинно бути числом більше 0')
+        if not radius > 0 :
+            raise ValueError('Значення радіусу повинно бути числом більше 0')
+        self._radius = radius
+
+    def square(self):
+        return round((self._radius ** 2 * self.Pi), 2)
+    def perimeter(self):
+        return round((2 * self.Pi * self._radius), 2)
+
+
+triangle_1 = Triangle(2, 2, 3)
+rectangle_1 = Square(5)
+circle_1 = Circle(8)
+
+figures = [triangle_1, rectangle_1, circle_1]
+for i in figures:
+    print(f'Площа {i.__class__.__name__}: {i.square()} та периметр: {i.perimeter()}')
