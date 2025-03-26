@@ -130,7 +130,8 @@ class Circle(Figure):
     def perimeter(self):
         return round((2 * self.Pi * self._radius), 2)
 
-
+if __name__ == '__main__’:
+    main()
 triangle_1 = Triangle(2, 2, 3)
 rectangle_1 = Square(5)
 circle_1 = Circle(8)
