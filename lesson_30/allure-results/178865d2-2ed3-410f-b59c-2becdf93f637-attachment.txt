@@ -1,0 +1,2 @@
+INFO     root:test_calc_app.py:39 recording added (2, 2, 'add', 4.0)
+INFO     root:test_calc_app.py:45 check new item: (1, 2, 2, 'add', 4.0)

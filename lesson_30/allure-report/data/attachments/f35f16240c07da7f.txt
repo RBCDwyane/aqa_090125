@@ -1,0 +1,1 @@
+INFO     root:test_calc_app.py:54 last rec changed -> result = 7.0
