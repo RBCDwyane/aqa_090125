@@ -1,0 +1,11 @@
+2025-05-18 19:31:09,342 [INFO] item creation
+2025-05-18 19:31:09,350 [INFO] add(1, 2) == 3
+2025-05-18 19:31:09,350 [INFO] subtract(5, 3) == 2
+2025-05-18 19:31:09,350 [INFO] multiply(4, 3) == 12
+2025-05-18 19:31:09,350 [INFO] divide(10, 2) == 5
+2025-05-18 19:31:09,350 [INFO] divide(5, 0) == None
+2025-05-18 19:31:09,351 [INFO] succes db connection
+2025-05-18 19:31:09,352 [INFO] recording added (2, 2, 'add', 4.0)
+2025-05-18 19:31:09,353 [INFO] check new item: (1, 2, 2, 'add', 4.0)
+2025-05-18 19:31:09,354 [INFO] last rec changed -> result = 7.0
+2025-05-18 19:31:09,355 [INFO] db dissconnect
