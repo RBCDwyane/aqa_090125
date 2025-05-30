@@ -2,28 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone source') {
+        stage('Install dependencies') {
             steps {
-                git url: 'https://github.com/alex-pancho/aqa_090125', branch: 'main'
+                echo "Current branch: ${env.BRANCH_NAME}"
+                sh 'pip install -r lesson_28/hw_28/requirements.txt'
             }
         }
-        stage('Build and activate venv') {
+
+        stage('Run tests') {
             steps {
-                sh '''
-                    python3 -m venv venv
-                    . venv/bin/activate
-                    pip install --upgrade pip
-                    pip install -r requirements.txt
-                '''
-            }
-        }
-        stage('Tests') {
-            steps {
-                sh '''
-                . venv/bin/activate
-                pytest -s -v --junitxml=$WORKSPACE/report.xml
-                '''
-                junit '**/report.xml'
+                sh 'pytest lesson_28/hw_28/tests --maxfail=1 --disable-warnings -v'
             }
         }
     }
